@@ -4,19 +4,37 @@
 #include <signal.h>
 #include <unistd.h>
 
+int print_message = 0;
+
 void handler(int signum)
 { //signal handler
-  printf("Hello World!\n");
-  signal(SIGALRM, handler); // he handler automatically disables handling of future signals so we set it again here.
+  print_message = 1;
+
+  // signal(SIGALRM, handler); // he handler automatically disables handling of future signals so we set it again here.
 }
 
 int main(int argc, char * argv[])
 {
-  signal(SIGALRM,handler); //register handler to handle SIGALRM
+  /*
+  note: https://stackoverflow.com/questions/21542077/c-sigalrm-alarm-to-display-message-every-second
+  idea: handler will pass back a boolean to main. while loop checks the boolean and does the printing if needed.
+  resets boolean
+  prints out message
   
+  */
+
+  signal(SIGALRM,handler); //register handler to handle SIGALRM
+  alarm(5);
   while(1){
-    alarm(5); //Schedule a SIGALRM for 1 second
-    printf("Turing was right!\n");
-  }; //busy wait for signal to be delivered
+    
+    if (print_message){
+      printf("Hello World!\n");
+      printf("Turing was right!\n");
+      print_message = 0;
+      alarm(5);
+    }
+  
+  
+  }
   return 0; //never reached
 }
