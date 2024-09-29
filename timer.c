@@ -39,7 +39,7 @@ int main(int argc, char * argv[])
 
   signal(SIGALRM,alarm_handler); //register alarm_handler to handle SIGALRM
   signal(SIGINT,int_handler); //register alarm_handler to handle SIGALRM
-  alarm(5);
+  alarm(1);
   while(1){
     
     if (print_message){
@@ -47,7 +47,7 @@ int main(int argc, char * argv[])
       printf("Turing was right!\n");
       print_message = 0;
       alarms_delivered ++;
-      alarm(5);
+      alarm(1);
     }
   
   

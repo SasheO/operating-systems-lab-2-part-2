@@ -10,7 +10,6 @@ void handler(int signum)
 { //signal handler
   printf("Hello World!\n");
   print_message = 1;
-  // signal(SIGALRM, handler); // he handler automatically disables handling of future signals so we set it again here.
 }
 
 int main(int argc, char * argv[])
