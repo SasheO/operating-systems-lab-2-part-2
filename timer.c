@@ -15,6 +15,14 @@ void handler(int signum)
 
 int main(int argc, char * argv[])
 {
+  /*
+  idea: 
+  get current time at beginning of main
+  set counter for number of SIGALRM that has passed
+  in handler for ctrl + c, get current time
+  subtract to get the time
+  */
+
   signal(SIGALRM,handler); //register handler to handle SIGALRM
   alarm(5);
   while(1){
