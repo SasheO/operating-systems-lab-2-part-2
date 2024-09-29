@@ -7,13 +7,16 @@
 void handler(int signum)
 { //signal handler
   printf("Hello World!\n");
-  exit(1); //exit after printing
+  signal(SIGALRM, handler); // he handler automatically disables handling of future signals so we set it again here.
 }
 
 int main(int argc, char * argv[])
 {
   signal(SIGALRM,handler); //register handler to handle SIGALRM
-  alarm(1); //Schedule a SIGALRM for 1 second
-  while(1); //busy wait for signal to be delivered
+  
+  while(1){
+    alarm(5); //Schedule a SIGALRM for 1 second
+    printf("Turing was right!\n");
+  }; //busy wait for signal to be delivered
   return 0; //never reached
 }
